@@ -1,7 +1,7 @@
 require("dotenv").config();
 
 const { ContactModel } = require("../models/contact.model");
-const { UserModel } = require("../Models/user.model");
+const { UserModel } = require("../models/user.model");
 
 // ** Contact adding
 async function AddContact(req, res) {
