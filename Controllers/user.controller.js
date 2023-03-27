@@ -2,7 +2,7 @@ require("dotenv").config();
 const bcrypt = require("bcrypt");
 
 
-const { UserModel } = require("../Models/user.model");
+const { UserModel } = require("../models/user.model");
 
 async function UserDetail(req, res) {
     const id = req.params.id;
