@@ -34,7 +34,7 @@ async function GetContact(req, res) {
 
 async function UpdateContact(req,res){
   const id = req.params.id;
-  console.log(id,"this is id")
+  
   const payload = req.body;
  const value={
    username:payload.value.username,

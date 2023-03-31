@@ -18,19 +18,24 @@ async function UserDetail(req, res) {
 
 // ** User Registeration
 async function UserRegisteration(req, res) {
-    const { password, ...payload } = req.body;
+    const { confirmpassword,password, ...payload } = req.body;
+    console.log(confirmpassword,password)
     try {
         const CheckUser = await UserModel.findOne({ email: payload.email })
 
         if (CheckUser) return res.status(401).json({ message: "User already exist" })
 
-        const hash = await bcrypt.hash(password, 5);
+        const hash = await bcrypt.hash(confirmpassword,password, 5);
+          if(confirmpassword===password){
 
-        const user = new UserModel({ ...payload, password: hash });
+              const user = new UserModel({ ...payload, password: hash });
+              await user.save();
+              res.status(201).json({ status: 200, message: "registeration success", credentials: user })
+          }else{
+            res.status(201).json({status:400,message:"confirm password not matched"})
+          }
 
-        await user.save();
 
-        res.status(201).json({ status: 200, message: "registeration success", credentials: user })
     } catch (error) {
         // console.log('error: ', error);
         res.send(error)
